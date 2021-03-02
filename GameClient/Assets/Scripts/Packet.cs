@@ -8,14 +8,16 @@ using UnityEngine;
 public enum ServerPackets
 {
     welcome = 1,
-	udpTest
+    spawnPlayer,
+    playerPosition,
+    playerRotation
 }
 
 /// <summary>Sent from client to server.</summary>
 public enum ClientPackets
 {
     welcomeReceived = 1,
-	udpTestReceived
+    playerMovement
 }
 
 public class Packet : IDisposable
@@ -116,42 +118,49 @@ public class Packet : IDisposable
     {
         buffer.Add(_value);
     }
+	
     /// <summary>Adds an array of bytes to the packet.</summary>
     /// <param name="_value">The byte array to add.</param>
     public void Write(byte[] _value)
     {
         buffer.AddRange(_value);
     }
+	
     /// <summary>Adds a short to the packet.</summary>
     /// <param name="_value">The short to add.</param>
     public void Write(short _value)
     {
         buffer.AddRange(BitConverter.GetBytes(_value));
     }
+	
     /// <summary>Adds an int to the packet.</summary>
     /// <param name="_value">The int to add.</param>
     public void Write(int _value)
     {
         buffer.AddRange(BitConverter.GetBytes(_value));
     }
+	
     /// <summary>Adds a long to the packet.</summary>
     /// <param name="_value">The long to add.</param>
     public void Write(long _value)
     {
         buffer.AddRange(BitConverter.GetBytes(_value));
     }
+	
     /// <summary>Adds a float to the packet.</summary>
     /// <param name="_value">The float to add.</param>
     public void Write(float _value)
     {
         buffer.AddRange(BitConverter.GetBytes(_value));
     }
+	
     /// <summary>Adds a bool to the packet.</summary>
     /// <param name="_value">The bool to add.</param>
     public void Write(bool _value)
     {
         buffer.AddRange(BitConverter.GetBytes(_value));
     }
+	
     /// <summary>Adds a string to the packet.</summary>
     /// <param name="_value">The string to add.</param>
     public void Write(string _value)
@@ -159,6 +168,25 @@ public class Packet : IDisposable
         Write(_value.Length); // Add the length of the string to the packet
         buffer.AddRange(Encoding.ASCII.GetBytes(_value)); // Add the string itself
     }
+	
+	/// <summary>Adds a Vector3 to the packet.</summary>
+	/// <param name="_value">The Vector3 to add.</param>
+	public void Write(System.Numerics.Vector3 _value)
+	{
+		Write(_value.X);
+		Write(_value.Y);
+		Write(_value.Z);
+	}
+
+	/// <summary>Adds a Quaternion to the packet.</summary>
+	/// <param name="_value">The Quaternion to add.</param>
+	public void Write(System.Numerics.Quaternion _value)
+	{
+		Write(_value.X);
+		Write(_value.Y);
+		Write(_value.Z);
+		Write(_value.W);
+        }
     #endregion
 
     #region Read Data
@@ -330,6 +358,20 @@ public class Packet : IDisposable
             throw new Exception("Could not read value of type 'string'!");
         }
     }
+	
+	/// <summary>Reads a Vector3 from the packet.</summary>
+	/// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
+	public System.Numerics.Vector3 ReadVector3(bool _moveReadPos = true)
+	{
+		return new System.Numerics.Vector3(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+	}
+
+	/// <summary>Reads a Quaternion from the packet.</summary>
+	/// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
+	public System.Numerics.Quaternion ReadQuaternion(bool _moveReadPos = true)
+	{
+		return new System.Numerics.Quaternion(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+	}
     #endregion
 
     private bool disposed = false;
