@@ -35,3 +35,8 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# ADDED
+GameClient/Packages/packages-lock.json
+GameClient/ProjectSettings/PackageManagerSettings.asset
+GameClient/ProjectSettings/XRSettings.asset
