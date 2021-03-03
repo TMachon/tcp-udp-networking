@@ -22,7 +22,7 @@ public class Server
         MaxPlayers = _maxPlayers;
         Port = _port;
 
-        Console.WriteLine("Starting server...");
+        Debug.Log("Starting server...");
         InitializeServerData();
 
         tcpListener = new TcpListener(IPAddress.Any, Port);
@@ -32,14 +32,14 @@ public class Server
         udpListener = new UdpClient(Port);
         udpListener.BeginReceive(UDPReceiveCallback, null);
 
-        Console.WriteLine($"Server started on port {Port}.");
+        Debug.Log($"Server started on port {Port}.");
     }
 
     private static void TCPConnectCallback(IAsyncResult _result)
     {
         TcpClient _client = tcpListener.EndAcceptTcpClient(_result);
         tcpListener.BeginAcceptTcpClient(TCPConnectCallback, null);
-        Console.WriteLine($"Incoming connection from {_client.Client.RemoteEndPoint}...");
+        Debug.Log($"Incoming connection from {_client.Client.RemoteEndPoint}...");
 
         for (int i = 1; i <= MaxPlayers; i++)
         {
@@ -50,7 +50,7 @@ public class Server
             }
         }
 
-        Console.WriteLine($"{_client.Client.RemoteEndPoint} failed to connect: Server full!");
+        Debug.Log($"{_client.Client.RemoteEndPoint} failed to connect: Server full!");
     }
 
     private static void UDPReceiveCallback(IAsyncResult _result)
@@ -91,7 +91,7 @@ public class Server
         }
         catch (Exception _err)
         {
-            Console.WriteLine($"Error receiving UDP data: {_err}");
+            Debug.Log($"Error receiving UDP data: {_err}");
         }
     }
 
@@ -106,7 +106,7 @@ public class Server
         }
         catch (Exception _err)
         {
-            Console.WriteLine($"Error sending data to {_clientEndPoint} via UDP: {_err}");
+            Debug.Log($"Error sending data to {_clientEndPoint} via UDP: {_err}");
         }
     }
 
@@ -122,6 +122,12 @@ public class Server
                 { (int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
                 { (int)ClientPackets.playerMovement, ServerHandle.PlayerMovement }
             };
-        Console.WriteLine("Initialized packets.");
+        Debug.Log("Initialized packets.");
+    }
+
+    public static void Stop()
+    {
+        tcpListener.Stop();
+        udpListener.Close();
     }
 }
