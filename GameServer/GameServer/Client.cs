@@ -29,7 +29,7 @@ namespace GameServer
             private Packet receivedData;
             private readonly int id;
             private NetworkStream stream;
-            private byte[] receiveBuffer;
+            private byte[] receivedBuffer;
 
             public TCP(int _id)
             {
@@ -45,9 +45,9 @@ namespace GameServer
                 stream = socket.GetStream();
 
                 receivedData = new Packet();
-                receiveBuffer = new byte[dataBufferSize];
+                receivedBuffer = new byte[dataBufferSize];
 
-                stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+                stream.BeginRead(receivedBuffer, 0, dataBufferSize, ReceiveCallback, null);
 
                 ServerSend.Welcome(id, "Welcome to the Jungle!");
             }
@@ -74,20 +74,20 @@ namespace GameServer
                     int _byteLength = stream.EndRead(_result);
                     if (_byteLength <= 0)
                     {
-                        // TODO: disconnect
+                        Server.clients[id].Disconnect();
                         return;
                     }
 
                     byte[] _data = new byte[_byteLength];
-                    Array.Copy(receiveBuffer, _data, _byteLength);
+                    Array.Copy(receivedBuffer, _data, _byteLength);
 
                     receivedData.Reset(HandleData(_data));
-                    stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+                    stream.BeginRead(receivedBuffer, 0, dataBufferSize, ReceiveCallback, null);
                 }
                 catch (Exception _ex)
                 {
                     Console.WriteLine($"Error receiving TCP data: {_ex}");
-                    // TODO: disconnect
+                    Server.clients[id].Disconnect();
                 }
             }
 
@@ -137,6 +137,15 @@ namespace GameServer
                 }
                 return false;
             }
+
+            public void Disconnect()
+            {
+                socket.Close();
+                stream = null;
+                receivedData = null;
+                receivedBuffer = null;
+                socket = null;
+            }
         }
 
         public class UDP
@@ -174,6 +183,11 @@ namespace GameServer
                     }
                 });
             }
+
+            public void Disconnect()
+            {
+                endPoint = null;
+            }
         }
 
         public void SendIntoGame(string _playerName)
@@ -195,6 +209,14 @@ namespace GameServer
                     ServerSend.SpawnPlayer(_client.id, player);
                 }
             }
+        }
+
+        public void Disconnect()
+        {
+            Console.WriteLine($"{tcp.socket.Client.RemoteEndPoint} has disconnect");
+            player = null;
+            tcp.Disconnect();
+            udp.Disconnect();
         }
     }
 }

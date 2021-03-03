@@ -37,12 +37,7 @@ public class ClientSend : MonoBehaviour
                 _packet.Write(_input);
             }
 
-            UnityEngine.Quaternion _gameRot = GameManager.players[Client.instance.myId].transform.rotation;
-            float _rotX = _gameRot.x;
-            float _rotY = _gameRot.y;
-            float _rotZ = _gameRot.z;
-            float _rotW = _gameRot.w;
-            System.Numerics.Quaternion _rotation = new System.Numerics.Quaternion(_rotX, _rotY, _rotZ, _rotW);
+            System.Numerics.Quaternion _rotation = UnityNumericsConversion.getQuaternion(GameManager.players[Client.instance.myId].transform.rotation);
             _packet.Write(_rotation);
 
             SendUDPData(_packet);
