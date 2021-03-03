@@ -140,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a1565485be694498b18ebcd31f3a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
+  username: 
 --- !u!114 &1248581502463360872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,3 +250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f3080239a586e4e870bde215607bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 6059283103315627166}
+  sensitivity: 100
+  clampAngle: 85

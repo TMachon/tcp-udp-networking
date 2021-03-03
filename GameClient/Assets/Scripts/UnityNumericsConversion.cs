@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnityNumericsConvertion : MonoBehaviour
+public class UnityNumericsConversion : MonoBehaviour
 {
-    public static UnityEngine.Vector3 vectorConversion(System.Numerics.Vector3 _vector)
+    public static UnityEngine.Vector3 getVector(System.Numerics.Vector3 _vector)
 	{
         float _posX = _vector.X;
         float _posY = _vector.Y;
@@ -12,7 +12,7 @@ public class UnityNumericsConvertion : MonoBehaviour
         return new UnityEngine.Vector3(_posX, _posY, _posZ);
 	}
 	
-	public static UnityEngine.Quaternion quaternionConversion(System.Numerics.Quaternion _quaternion)
+	public static UnityEngine.Quaternion getQuaternion(System.Numerics.Quaternion _quaternion)
 	{
         float _rotX = _quaternion.X;
         float _rotY = _quaternion.Y;
