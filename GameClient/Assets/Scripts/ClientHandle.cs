@@ -66,4 +66,14 @@ public class ClientHandle : MonoBehaviour
         int _spawnerId = _packet.ReadInt();
         GameManager.spawners[_spawnerId].ItemSpawned();
     }
+
+    public static void CreateBuildingCube(Packet _packet)
+    {
+        int _cubeId = _packet.ReadInt();
+        Vector3 _postition = _packet.ReadVector3();
+        Quaternion _rotation = _packet.ReadQuaternion();
+        Vector3 _scale = _packet.ReadVector3();
+
+        GameManager.instance.CreateBuildingCube(_cubeId, _postition, _rotation, _scale);
+    }
 }

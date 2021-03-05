@@ -268,7 +268,8 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
             { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
             { (int)ServerPackets.createItemSpawner, ClientHandle.CreateItemSpawner },
-            { (int)ServerPackets.itemSpawned, ClientHandle.ItemSpawned }
+            { (int)ServerPackets.itemSpawned, ClientHandle.ItemSpawned },
+            { (int)ServerPackets.createBuildingCube, ClientHandle.CreateBuildingCube }
         };
         Debug.Log("Initialized packets.");
     }

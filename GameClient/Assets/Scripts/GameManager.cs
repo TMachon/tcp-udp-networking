@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject itemSpawnerPrefab;
 
+    public static Dictionary<int, BuildingCube> buildingCubes = new Dictionary<int, BuildingCube>();
+    public GameObject buildingCubePrefab;
+
     private void Awake()
     {
         if (instance == null)
@@ -48,5 +51,14 @@ public class GameManager : MonoBehaviour
         GameObject _spawner = Instantiate(itemSpawnerPrefab, _position, itemSpawnerPrefab.transform.rotation);
         _spawner.GetComponent<ItemSpawner>().Initialize(_spawnerId, _hasItem);
         spawners.Add(_spawnerId, _spawner.GetComponent<ItemSpawner>());
+    }
+
+    public void CreateBuildingCube(int _cubeId, Vector3 _position, Quaternion _rotation, Vector3 _scale)
+    {
+        GameObject _buildingCube = Instantiate(itemSpawnerPrefab, _position, _rotation);
+        _buildingCube.transform.localScale = _scale;
+
+        _buildingCube.GetComponent<BuildingCube>().Initialize(_cubeId, _position, _rotation, _scale);
+        buildingCubes.Add(_cubeId, _buildingCube.GetComponent<BuildingCube>());
     }
 }

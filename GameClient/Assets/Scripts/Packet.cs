@@ -13,7 +13,8 @@ public enum ServerPackets
     playerRotation,
     playerDisconnected,
     createItemSpawner,
-    itemSpawned
+    itemSpawned,
+    createBuildingCube
 }
 
 /// <summary>Sent from client to server.</summary>

@@ -133,4 +133,16 @@ public class ServerSend
             SendTCPDataToAll(_packet);
         }
     }
+
+    public static void CreateBuildingCube(int _cubeId, Vector3 _position, Quaternion _rotation, Vector3 _scale)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.createBuildingCube))
+        {
+            _packet.Write(_cubeId);
+            _packet.Write(_position);
+            _packet.Write(_rotation);
+            _packet.Write(_scale);
+            SendTCPDataToAll(_packet);
+        }
+    }
 }

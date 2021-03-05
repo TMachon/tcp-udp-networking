@@ -214,6 +214,11 @@ public class Client
         {
             ServerSend.CreateItemSpawner(id, _itemSpawner.spawnerId, _itemSpawner.transform.position, _itemSpawner.hasItem);
         }
+
+        foreach (BuildingCube _buildingCube in BuildingCube.cubes.Values)
+        {
+            ServerSend.CreateBuildingCube(_buildingCube.cubeId, _buildingCube.position, _buildingCube.rotation, _buildingCube.scale);
+        }
     }
 
     public void Disconnect()
