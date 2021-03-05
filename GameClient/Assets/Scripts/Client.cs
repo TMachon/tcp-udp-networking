@@ -226,6 +226,7 @@ public class Client : MonoBehaviour
 				
 				HandleData(_data);
 			} catch (Exception _err) {
+                Debug.Log($"Error with UDP callback: {_err}");
                 Disconnect();
 			}
 		}
@@ -265,7 +266,9 @@ public class Client : MonoBehaviour
 			{ (int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
             { (int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
-            { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected }
+            { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
+            { (int)ServerPackets.createItemSpawner, ClientHandle.CreateItemSpawner },
+            { (int)ServerPackets.itemSpawned, ClientHandle.ItemSpawned }
         };
         Debug.Log("Initialized packets.");
     }

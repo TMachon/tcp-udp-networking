@@ -11,7 +11,9 @@ public enum ServerPackets
     spawnPlayer,
     playerPosition,
     playerRotation,
-    playerDisconnected
+    playerDisconnected,
+    createItemSpawner,
+    itemSpawned
 }
 
 /// <summary>Sent from client to server.</summary>
@@ -362,16 +364,16 @@ public class Packet : IDisposable
 	
 	/// <summary>Reads a Vector3 from the packet.</summary>
 	/// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
-	public System.Numerics.Vector3 ReadVector3(bool _moveReadPos = true)
+	public UnityEngine.Vector3 ReadVector3(bool _moveReadPos = true)
 	{
-		return new System.Numerics.Vector3(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+		return new UnityEngine.Vector3(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
 	}
 
 	/// <summary>Reads a Quaternion from the packet.</summary>
 	/// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
-	public System.Numerics.Quaternion ReadQuaternion(bool _moveReadPos = true)
+	public UnityEngine.Quaternion ReadQuaternion(bool _moveReadPos = true)
 	{
-		return new System.Numerics.Quaternion(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+		return new UnityEngine.Quaternion(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
 	}
     #endregion
 
