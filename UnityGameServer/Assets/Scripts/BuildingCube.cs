@@ -18,6 +18,9 @@ public class BuildingCube : MonoBehaviour
     {
         cubeId = nextCubeId;
         nextCubeId++;
+        position = this.transform.position;
+        rotation = this.transform.rotation;
+        scale = this.transform.localScale;
         cubes.Add(cubeId, this);
     }
 }

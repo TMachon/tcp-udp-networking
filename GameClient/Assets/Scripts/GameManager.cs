@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     public void CreateBuildingCube(int _cubeId, Vector3 _position, Quaternion _rotation, Vector3 _scale)
     {
-        GameObject _buildingCube = Instantiate(itemSpawnerPrefab, _position, _rotation);
+        GameObject _buildingCube = Instantiate(buildingCubePrefab, _position, _rotation);
         _buildingCube.transform.localScale = _scale;
 
         _buildingCube.GetComponent<BuildingCube>().Initialize(_cubeId, _position, _rotation, _scale);
