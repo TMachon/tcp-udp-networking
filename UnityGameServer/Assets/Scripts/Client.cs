@@ -217,7 +217,7 @@ public class Client
 
         foreach (BuildingCube _buildingCube in BuildingCube.cubes.Values)
         {
-            ServerSend.CreateBuildingCube(_buildingCube.cubeId, _buildingCube.position, _buildingCube.rotation, _buildingCube.scale);
+            ServerSend.CreateBuildingCube(id, _buildingCube.cubeId, _buildingCube.position, _buildingCube.rotation, _buildingCube.scale);
         }
     }
 
