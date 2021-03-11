@@ -83,25 +83,25 @@ public class ServerSend
             SendTCPData(_toClient, _packet);
         }
     }
-    public static void PlayerPosition(Player _player)
+    public static void PlayerPosition(int _toPlayer, Vector3 _position)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerPosition))
         {
-            _packet.Write(_player.id);
-            _packet.Write(_player.transform.position);
+            _packet.Write(_toPlayer);
+            _packet.Write(_position);
 
-            SendUDPDataToAll(_packet);
+            SendUDPDataToAll(_toPlayer, _packet);
         }
     }
 
-    public static void PlayerRotation(Player _player)
+    public static void PlayerRotation(int _toPlayer, Quaternion _rotation)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerRotation))
         {
-            _packet.Write(_player.id);
-            _packet.Write(_player.transform.rotation);
+            _packet.Write(_toPlayer);
+            _packet.Write(_rotation);
 
-            SendUDPDataToAll(_player.id, _packet);
+            SendUDPDataToAll(_toPlayer, _packet);
         }
     }
 

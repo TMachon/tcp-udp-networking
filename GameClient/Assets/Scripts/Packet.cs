@@ -175,22 +175,22 @@ public class Packet : IDisposable
 	
 	/// <summary>Adds a Vector3 to the packet.</summary>
 	/// <param name="_value">The Vector3 to add.</param>
-	public void Write(System.Numerics.Vector3 _value)
+	public void Write(Vector3 _value)
 	{
-		Write(_value.X);
-		Write(_value.Y);
-		Write(_value.Z);
+		Write(_value.x);
+		Write(_value.y);
+		Write(_value.z);
 	}
 
 	/// <summary>Adds a Quaternion to the packet.</summary>
 	/// <param name="_value">The Quaternion to add.</param>
-	public void Write(System.Numerics.Quaternion _value)
+	public void Write(Quaternion _value)
 	{
-		Write(_value.X);
-		Write(_value.Y);
-		Write(_value.Z);
-		Write(_value.W);
-        }
+		Write(_value.x);
+		Write(_value.y);
+		Write(_value.z);
+		Write(_value.w);
+    }
     #endregion
 
     #region Read Data

@@ -21,6 +21,8 @@ public class ServerHandle
 
     public static void PlayerMovement(int _fromClient, Packet _packet)
     {
+        /**
+        //legacy
         bool[] _inputs = new bool[_packet.ReadInt()];
         for (int i = 0; i < _inputs.Length; i++)
         {
@@ -29,6 +31,13 @@ public class ServerHandle
         Quaternion _rotation = _packet.ReadQuaternion();
 
         Server.clients[_fromClient].player.SetInput(_inputs, _rotation);
+        /**/
+        Vector3 _newPosition = _packet.ReadVector3();
+        Quaternion _newRotation = _packet.ReadQuaternion();
+        Server.clients[_fromClient].player.Move(_newPosition, _newRotation);
+        ServerSend.PlayerPosition(_fromClient, _newPosition);
+        ServerSend.PlayerRotation(_fromClient, _newRotation);
+        /**/
 
     }
 }

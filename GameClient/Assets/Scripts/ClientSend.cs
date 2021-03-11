@@ -26,19 +26,13 @@ public class ClientSend : MonoBehaviour
             SendTCPData(_packet);
         }
     }
-	
-	public static void PlayerMovement(bool[] _inputs)
+
+    public static void PlayerMovement(Vector3 _newPosition, Quaternion _newRotation)
     {
         using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
         {
-            _packet.Write(_inputs.Length);
-            foreach (bool _input in _inputs)
-            {
-                _packet.Write(_input);
-            }
-
-            System.Numerics.Quaternion _rotation = UnityNumericsConversion.getQuaternion(GameManager.players[Client.instance.myId].transform.rotation);
-            _packet.Write(_rotation);
+            _packet.Write(_newPosition);
+            _packet.Write(_newRotation);
 
             SendUDPData(_packet);
         }

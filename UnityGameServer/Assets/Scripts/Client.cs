@@ -193,7 +193,7 @@ public class Client
     {
         player = NetworkManager.instance.InstantiatePlayer();
         player.Initialize(id, _playerName);
-            ;
+
         foreach (Client _client in Server.clients.Values)
         {
             if (_client.player != null && _client.id != id)
