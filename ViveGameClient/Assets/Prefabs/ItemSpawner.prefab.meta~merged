@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 9740eeedaef6deb44b406cc414184688
+=======
+<<<<<<< HEAD:GameClient/Assets/Prefabs/Enemy.prefab.meta
+guid: 2dccfc4a4c82dcb40af4a55d886f0045
+=======
+guid: 3ae7e0b81526ca241ba878053e9f8d68
+>>>>>>> fa2837de6a77881e8265cb04fde8ec1c50aec427:GameClient/Assets/Prefabs/ItemSpawner.prefab.meta
+>>>>>>> fa2837de6a77881e8265cb04fde8ec1c50aec427
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
